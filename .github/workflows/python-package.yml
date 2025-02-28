@@ -39,3 +39,4 @@ jobs:
           curl -X 'POST' 'http://127.0.0.1:8000/predict' \
           -H 'Content-Type: application/json' \
           -d '{"Age": 30, "Salary": 60000, "Department": 2}'
+
