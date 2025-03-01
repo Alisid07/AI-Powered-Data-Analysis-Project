@@ -24,18 +24,31 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "requirements.txt NOT FOUND"; exit 1; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "❌ requirements.txt NOT FOUND"; exit 1; fi
+
+      - name: Check File Structure
+        run: ls -R   # Debugging step to check directories
 
       - name: Run Data Preprocessing
-        run: python scripts/data_preprocessing.py
+        run: |
+          if [ -f scripts/data_preprocessing.py ]; then
+            python scripts/data_preprocessing.py
+          else
+            echo "❌ scripts/data_preprocessing.py NOT FOUND"; exit 1;
+          fi
 
       - name: Train Model
-        run: python scripts/train_model.py --model random_forest
+        run: |
+          if [ -f scripts/train_model.py ]; then
+            python scripts/train_model.py --model random_forest
+          else
+            echo "❌ scripts/train_model.py NOT FOUND"; exit 1;
+          fi
 
       - name: Run API Tests (Optional)
         run: |
-          uvicorn app.main:app --host 127.0.0.1 --port 8000 &
-          sleep 5
+          uvicorn app.main:app --host 127.0.0.1 --port 8000 &  # Start FastAPI server
+          sleep 5  # Wait for the server to start
           curl -X 'POST' 'http://127.0.0.1:8000/predict' \
           -H 'Content-Type: application/json' \
           -d '{"Age": 30, "Salary": 60000, "Department": 2}'
