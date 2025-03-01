@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+steps:
+  - name: Checkout Repository  # ✅ Fix for "could not get source code"
+    uses: actions/checkout@v4
+
     steps:
       - name: Checkout Repository  # ✅ This fetches your code
         uses: actions/checkout@v4
