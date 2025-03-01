@@ -12,20 +12,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout Repository  # ✅ Fix for "could not get source code"
-    uses: actions/checkout@v4
-
     steps:
-      - name: Checkout Repository  # ✅ This fetches your code
-        uses: actions/checkout@v4
+      - name: Checkout Repository ✅
+        uses: actions/checkout@v3
 
-      - name: Set Up Python
+      - name: Set Up Python ✅
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      - name: Install Dependencies
+      - name: Install Dependencies ✅
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -43,4 +39,5 @@ steps:
           curl -X 'POST' 'http://127.0.0.1:8000/predict' \
           -H 'Content-Type: application/json' \
           -d '{"Age": 30, "Salary": 60000, "Department": 2}'
+
 
