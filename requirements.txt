@@ -110,3 +110,10 @@ webencodings==0.5.1
 widgetsnbextension==3.6.1
 wsproto==1.1.0
 zope.interface==5.5.2
+numpy
+pandas
+scikit-learn
+fastapi
+uvicorn
+matplotlib
+seaborn
